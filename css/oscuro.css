@@ -1,0 +1,409 @@
+/* DiseÃ±o del botÃ³n de cambio de tema */
+#buttonTheme {
+    position: fixed;
+    bottom: 20px; /* Distancia desde la parte inferior de la pantalla */
+    left: 20px;  /* Distancia desde la parte izquierda de la pantalla */
+    z-index: 1000; /* AsegÃºrate de que el botÃ³n estÃ© por encima de otros elementos */
+    width: 40px; /* Ancho del botÃ³n circular */
+    height: 40px; /* Altura del botÃ³n circular */
+    background-color: #ffffff; /* Color de fondo del botÃ³n */
+    color: black; /* Color del icono */
+    border: none;
+    border-radius: 50%; /* Hace que el botÃ³n sea circular */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    transition: background-color 0.3s;
+}
+
+/* AÃ±adir el icono de luna antes del contenido del botÃ³n */
+#buttonTheme::before {
+    content: "\f185"; /* CÃ³digo del icono de luna en Font Awesome */
+    font-family: 'Font Awesome 5 Free'; /* Nombre de la fuente de Font Awesome */
+    font-weight: 900; /* Peso de la fuente (negrita) */
+    font-size: 20px;
+}
+
+/* Cambiar el color de fondo al pasar el ratÃ³n */
+#buttonTheme:hover {
+    background-color: #fffafa5b; /* Color de fondo al pasar el ratÃ³n */
+}
+
+/* Tooltip text */
+#buttonTheme .tooltiptext {
+    font-size: 15px;
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    left: 100%;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* AÃ±adir el texto del tooltip despuÃ©s del contenido del span */
+#buttonTheme .tooltiptext::after {
+    content: "Tema Claro"; /* Texto del tooltip */
+}
+
+/* Mostrar el tooltip al pasar el ratÃ³n */
+#buttonTheme:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Aplica un fondo de color oscuro a todo el cuerpo del documento */
+body{
+    background-color: #080710;
+}
+
+/* Establece el box-sizing a 'border-box' y elimina padding y margin de todos los elementos */
+*,
+*:before,
+*:after{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* Define las dimensiones y posiciÃ³n del contenedor de fondo del formulario */
+#loginContenedor{
+    width: 430px;
+    height: 520px;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    left: 50%;
+    top: 50%;
+}
+
+/* Estiliza las formas decorativas dentro del contenedor de fondo */
+#loginContenedor .shape{
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    border-radius: 50%;
+}
+
+/* Define la primera forma decorativa con un degradado y posiciÃ³n especÃ­fica */
+.shape:first-child{
+    background: linear-gradient(
+        #ad1818, /* Color superior del degradado */
+        #15144e  /* Color inferior del degradado */
+    );
+    left: -80px;   /* PosiciÃ³n a la izquierda */
+    top: -80px;    /* PosiciÃ³n hacia arriba */
+}
+
+/* Define la segunda forma decorativa con un degradado en la direcciÃ³n horizontal y posiciÃ³n especÃ­fica */
+.shape:last-child{
+    background: linear-gradient(
+        to right,   /* DirecciÃ³n del degradado de izquierda a derecha */
+        #ff512f,    /* Color inicial del degradado */
+        #f09819     /* Color final del degradado */
+    );
+    right: -30px;  /* PosiciÃ³n a la derecha */
+    bottom: -80px; /* PosiciÃ³n hacia abajo */
+}
+
+/* Estiliza el formulario de inicio de sesiÃ³n */
+#loginForm{
+    height: 520px;
+    width: 400px;
+    background-color: rgba(255,255,255,0.13); /* Fondo blanco translÃºcido */
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);              /* Efecto de desenfoque en el fondo */
+    border: 2px solid rgba(255,255,255,0.1);  /* Borde blanco translÃºcido */
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);    /* Sombra alrededor del formulario */
+    padding: 50px 35px;                       /* Espaciado interno del formulario */
+}
+
+/* Aplica estilos a todos los elementos dentro del formulario */
+#loginForm *{
+    font-family: 'Poppins', sans-serif;  /* Fuente 'Poppins' */
+    color: #ffffff;                      /* Color de texto blanco */
+    letter-spacing: 0.5px;               /* Espaciado entre letras */
+    outline: none;                       /* Elimina el contorno de los elementos */
+    border: none;                        /* Elimina el borde de los elementos */
+}
+
+/* Estilo para el encabezado del formulario */
+#loginForm h3{
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 42px;
+    text-align: center;  /* Centra el texto */
+}
+
+/* Estilo para las etiquetas de los campos de entrada */
+#labelLogin{
+    display: block;
+    margin-top: 30px;  /* Margen superior */
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* Estilo para los campos de entrada */
+#usuario{
+    display: block;
+    height: 50px;
+    width: 100%;
+    background-color: rgba(85, 85, 85, 0.384); /* Fondo blanco translÃºcido */
+    border-radius: 3px;
+    padding: 0 10px;      /* Espaciado interno */
+    margin-top: 8px;      /* Margen superior */
+    font-size: 14px;
+    font-weight: 300;
+}
+
+/* Estilo para los campos de entrada */
+#contrasena{
+    display: block;
+    height: 50px;
+    width: 100%;
+    background-color: rgba(85, 85, 85, 0.384);  /* Fondo blanco translÃºcido */
+    border-radius: 3px;
+    padding: 0 10px;      /* Espaciado interno */
+    margin-top: 8px;      /* Margen superior */
+    font-size: 14px;
+    font-weight: 300;
+}
+
+/* Estilo para el texto del marcador de posiciÃ³n en los campos de entrada */
+::placeholder{
+    color: #e5e5e5;  /* Color gris claro */
+}
+
+/* Estilo para el botÃ³n de envÃ­o del formulario */
+#ingresar{
+    margin-top: 50px;         /* Margen superior */
+    width: 100%;
+    background-color: #ffffffa9; /* Fondo blanco */
+    color: #080710;            /* Color del texto oscuro */
+    padding: 15px 0;           /* Espaciado interno vertical */
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;           /* Cursor en forma de mano */
+}
+
+#recuperarContraseÃ±a {
+    color: #ffffff;
+    background-color: #08071000;
+}
+
+#nav {
+    background-color: #212529;
+}
+
+
+/* Estilos para los elementos de la lista */
+#navbarOpciones .navbar-nav .nav-item {
+    margin: 0 5px; /* Espacio entre los elementos */
+}
+
+#navbarOpciones .navbar-nav .nav-link {
+    color: #000; /* Color del texto */
+    background-color: #e9ecef; /* Color de fondo del botón */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 10px 20px; /* Espaciado interno */
+    transition: all 0.3s ease; /* Transición suave para efectos hover */
+    text-align: center; /* Centrar el texto */
+    border: 1px solid #dee2e6; /* Borde sutil */
+}
+
+/* Efecto hover para los botones */
+#navbarOpciones .navbar-nav .nav-link:hover {
+    background-color: #007bff; /* Cambiar color de fondo al pasar el mouse */
+    color: #fff; /* Cambiar color del texto al pasar el mouse */
+    transform: translateY(-2px); /* Efecto de levantamiento */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+}
+
+/* Estilo para el botón activo */
+#navbarOpciones .navbar-nav .nav-link.active {
+    background-color: #007bff; /* Color de fondo para el botón activo */
+    color: #fff; /* Color del texto para el botón activo */
+    border-color: #007bff; /* Color del borde para el botón activo */
+}
+
+
+#fechahora {
+    position: absolute;
+    right: 10px;
+    color: rgba(255, 255, 255, 0.856);
+}
+
+#contenedor {
+    background-color: #212529;
+    color: white;
+    text-align: center;
+    position: relative;
+    margin-top: 9%;
+}
+
+
+#bienvenida-container img {
+    max-width: 150px; /* TamaÃ±o mediano */
+    width: 80%;
+    filter: invert(0%);
+}
+
+
+/* AnimaciÃ³n de apariciÃ³n */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Estilos del pie de pÃ¡gina */
+footer {
+    background-color: #212529; /* Fondo gris transparentoso */
+    color: #fff;                               /* Texto blanco */
+    padding: 10px 0;                           /* Espaciado interior (arriba y abajo) del pie de pÃ¡gina */
+    display: flex;                             /* Usa el modelo de caja flex para el pie de pÃ¡gina */
+    justify-content: center;                   /* Centra los elementos dentro del pie de pÃ¡gina horizontalmente */
+    align-items: center;                       /* Centra los elementos dentro del pie de pÃ¡gina verticalmente */
+    position: fixed;                           /* PosiciÃ³n fija en la ventana del navegador */
+    bottom: 0;                                 /* Alinea el pie de pÃ¡gina en la parte inferior de la ventana */
+    width: 100%;     
+    filter: invert(0%);                          /* Ancho completo del pie de pÃ¡gina */
+    animation: slideIn 1s ease-in-out;         /* AnimaciÃ³n al entrar */
+}
+
+footer .container {
+    display: flex;
+    justify-content: space-around;
+    width: 30%;
+}
+
+footer img {
+    width: 150px;
+    height: auto;
+    margin: 0 20px;
+    display: block;
+    transition: transform 0.3s;
+}
+
+footer img:hover {
+    transform: scale(1.2);
+}
+
+/* Animacion de aparicion desde abajo */
+@keyframes slideIn {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+}
+
+
+#cardCSS{
+    margin-top: 1%; 
+    margin-left: 4%; 
+    margin-right: 4%; 
+    background-color: #212529;
+    color: white;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 0;
+}
+
+.page-indicator {
+    text-align: center;
+    margin-top: 10px;
+}
+
+#prevPage,
+#nextPage {
+    background-color: #212529;
+    border-color: white;
+    color: white;
+    transition: background-color 0.3s ease, border-color 0.3s ease; /* Suaviza la transiciÃ³n del efecto */
+}
+
+#prevPage:hover,
+#nextPage:hover {
+    background-color: #888888c2; /* Tono gris claro */
+    border-color: #d3d3d3; /* Color de borde gris claro */
+}
+
+.hidden-column {
+    display: none;
+}
+
+/* CSS para los bordes rojos cuando los campos estÃ¡n deshabilitados */
+.input-disabled {
+    border: 2px solid red;
+}
+
+/* CSS para los bordes verdes cuando los campos se vuelven a habilitar */
+.input-enabled {
+    border: 2px solid green;
+}
+
+.btn-nombre-sucursal {
+    color: #fff; /* Cambia el color del texto */
+}
+
+/* Cambiar color del texto de la informaciÃ³n "Mostrando X a Y de Z registros" */
+.dataTables_info {
+    color: #FFFFFF !important; /* Forzar a que el color sea blanco */
+}
+
+/* Cambiar color del texto de la paginaciÃ³n */
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    color: #FFFFFF !important; /* Color blanco para los botones de paginaciÃ³n */
+}
+
+/* Cambiar color del botÃ³n de paginaciÃ³n activo */
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background-color: #0056b3 !important; /* Fondo del botÃ³n activo */
+    color: #000000 !important; /* Texto blanco para el botÃ³n activo */
+}
+
+/* Cambiar color del botÃ³n de paginaciÃ³n al pasar el mouse */
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background-color: #007bff !important; /* Fondo al pasar el mouse */
+    color: #FFFFFF !important; /* Texto blanco al pasar el mouse */
+}
+
+/* Cambiar color del selector de longitud (cantidad de registros por pÃ¡gina) */
+.dataTables_length label {
+    color: #FFFFFF !important; /* Cambiar a blanco */
+}
+
+/* Cambiar color del campo de bÃºsqueda de DataTables */
+.dataTables_filter label {
+    color: #FFFFFF !important; /* Cambiar a blanco */
+}
+
+.dataTables_filter input {
+    color: #FFFFFF !important; /* Cambiar texto del input a blanco */
+    background-color: #333333; /* Fondo oscuro */
+}
+
+/* Cambiar color de los textos en las celdas de la tabla */
+#dataTable tbody td {
+    color: #FFFFFF !important; /* Cambiar color del texto en las celdas a blanco */
+}
+
+
+#navbarOpciones .navbar-nav {
+    margin: 0 auto; /* Centramos el navbar */
+}
+
+#navStyle{
+    color: #FFF;
+}
