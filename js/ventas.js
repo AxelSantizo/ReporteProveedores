@@ -6,15 +6,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const today = new Date().toISOString().split('T')[0]; 
     document.getElementById('FechaFinal').value = today;
 
-    // Crear una nueva fecha y restar un dÃ­a para FechaInicio
+    // Crear una nueva fecha y restar un día para FechaInicio
     const yesterday = new Date();
     yesterday.setDate(yesterday.getDate() - 1);
     const formattedYesterday = yesterday.toISOString().split('T')[0]; 
 
-    // Asignar la fecha de inicio (un dÃ­a antes) al campo de FechaInicio
+    // Asignar la fecha de inicio (un día antes) al campo de FechaInicio
     document.getElementById('FechaInicio').value = formattedYesterday;
 
-    // FunciÃ³n para mostrar cuadros de diÃ¡logo con SweetAlert2
+    // Función para mostrar cuadros de diálogo con SweetAlert2
     function showAlert(title, text, icon = 'info') {
         Swal.fire({
             title: title,
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // FunciÃ³n para mostrar el spinner
+    // Función para mostrar el spinner
     function showSpinner() {
         Swal.fire({
             title: 'Cargando, porfavor espere!',
@@ -34,28 +34,28 @@ document.addEventListener('DOMContentLoaded', function() {
             allowEscapeKey: false,     // Deshabilitar tecla Escape
             backdrop: true,            // Mantener el fondo oscuro
             didOpen: () => {
-                // AquÃ­ puedes agregar cualquier lÃ³gica adicional cuando el spinner se muestre
+                // Aquí puedes agregar cualquier ló gica adicional cuando el spinner se muestre
             }
         });
     }
-    
-    // FunciÃ³n para ocultar el spinner
+
+    // Función para ocultar el spinner
     function hideSpinner() {
         Swal.close();
     }
 
-    // FunciÃ³n para obtener los nombres de las sucursales
+    // Función para obtener los nombres de las sucursales
     function fetchSucursales() {
         fetch(`${basePath}backend/obtenerSucursales`)
             .then(response => response.json())
             .then(data => {
                 const sucursalesSelect = document.getElementById('sucursalBusqueda');
-                sucursalesSelect.innerHTML = '<option value="">Reporte General</option>'; // OpciÃ³n por defecto
+                sucursalesSelect.innerHTML = '<option value="">Reporte General</option>'; // Opción por defecto
 
                 data.forEach(sucursal => {
                     const option = document.createElement('option');
-                    option.value = sucursal.idSucursal; // Valor del select serÃ¡ idSucursal
-                    option.textContent = sucursal.NombreSucursal; // Texto visible serÃ¡ NombreSucursal
+                    option.value = sucursal.idSucursal; // Valor del select será idSucursal
+                    option.textContent = sucursal.NombreSucursal; // Texto visible será NombreSucursal
                     sucursalesSelect.appendChild(option);
                 });
             })
@@ -161,24 +161,24 @@ document.addEventListener('DOMContentLoaded', function() {
                     throw new Error(errorMessage);
                 });
             }
-            return response.json(); // Recibir el nÃºmero total de registros desde el backend
+            return response.json(); // Recibir el número total de registros desde el backend
         })
         .then(result => {
             // Verificar si hay registros
             if (result.totalRecords === 0) {
-                showAlert('InformaciÃ³n', 'No se encontrÃ³ informaciÃ³n para los criterios seleccionados.', 'info');
+                showAlert('Información', 'No se encontró información para los criterios seleccionados.', 'info');
                 return;
             }
             // Llenar los selectores con los datos necesarios
             llenarSelectores(result.selectores);
-    
-            // Calcula los totales para las grÃ¡ficas
+
+            // Calcula los totales para las gráficas
             obtenerTotales();
 
             // Actualizar la tabla con los datos del reporte
             updateTable(result.totalRecords, tipoReporte, sucursalBuscar, fechaInicio, fechaFin);
-    
-            // Crear resetData como una funciÃ³n global para restablecer datos
+
+            // Crear resetData como una función global para restablecer datos
             globalResetData = function () {
                 setTimeout(() => {
                     llenarSelectores(result.selectores);
@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Evento para el boton quitarFiltro
     document.getElementById('quitarfiltro').addEventListener('click', function() {    
         showSpinner();
-        // Restablecer los selectores a la opciÃ³n predeterminada y deja los campos vacios
+        // Restablecer los selectores a la opción predeterminada y deja los campos vacíos
         document.getElementById('sucursalFiltro').selectedIndex = 0;
         document.getElementById('departamentoFiltro').selectedIndex = 0;
         document.getElementById('categoriaFiltro').selectedIndex = 0;
@@ -220,14 +220,14 @@ document.addEventListener('DOMContentLoaded', function() {
         if ($.fn.DataTable.isDataTable('#dataTable')) {
             $('#dataTable').DataTable().clear().destroy();
         }
-    
-        // Configurar DataTables para manejar datos dinÃ¡micos con paginaciÃ³n
+
+        // Configurar DataTables para manejar datos dinámicos con paginación
         $('#dataTable').DataTable({
             serverSide: true,
             responsive: true,
             autoWidth: false,
             ajax: function (data, callback) {
-                // Calcular la pÃ¡gina actual y el tamaÃ±o de la pÃ¡gina
+                // Calcular la página actual y el tamaño de la página
                 const page = (data.start / data.length) + 1;
                 const pageSize = data.length;
         
@@ -235,7 +235,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const requestBody = {
                     page,
                     pageSize,
-                    search: data.search, // BÃºsqueda enviada por DataTables
+                    search: data.search, // Búsqueda enviada por DataTables
                     order: data.order,   // Ordenamiento enviado por DataTables
                     columns: data.columns // Columnas visibles enviadas por DataTables
                 };
@@ -258,7 +258,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             draw: data.draw,
                             recordsTotal: result.totalRecords,
                             recordsFiltered: result.totalRecords,
-                            data: result.data // Datos de la pÃ¡gina actual
+                            data: result.data // Datos de la página actual
                         });
                     })
                     .catch(error => {
@@ -341,16 +341,16 @@ document.addEventListener('DOMContentLoaded', function() {
         const button = $(this);
         const id = button.data('id');
         const nombre = button.data('nombre');
-    
-        // Actualizar el modal con la informaciÃ³n seleccionada
+
+        // Actualizar el modal con la información seleccionada
         document.getElementById('tituloSucursal').innerText = nombre;
         document.getElementById('tituloSucursal').value = id;
-    
-        // Fetch al backend para obtener mÃ¡s detalles
+
+        // Fetch al backend para obtener más detalles
         fetch(`${basePath}backend/detalleSucursal?nombre=${encodeURIComponent(id)}`)
             .then(response => {
                 if (!response.ok) {
-                    throw new Error('No se encontrÃ³ la sucursal.');
+                    throw new Error('No se encontró la sucursal.');
                 }
                 return response.json();
             })
@@ -397,8 +397,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
         // 1. Sucursales
         const sucursalFiltro = document.getElementById('sucursalFiltro');
-        sucursalFiltro.innerHTML = `<option value="">Todas las sucursales</option>`; // OpciÃ³n predeterminada
-        // Usar Map para obtener sucursales Ãºnicas
+        sucursalFiltro.innerHTML = `<option value="">Todas las sucursales</option>`; // Opción predeterminada
+        // Usar Map para obtener sucursales únicas
         const sucursalesUnicas = Array.from(new Map(
             (sucursales || []).map(sucursal => [sucursal.id, sucursal]) // Usar ID como clave
         ).values());
@@ -421,10 +421,10 @@ document.addEventListener('DOMContentLoaded', function() {
             departamentoFiltro.appendChild(option);
         });
     
-        // 3. CategorÃ­as
+        // 3. Categorías
         const categoriaFiltro = document.getElementById('categoriaFiltro');
         categoriaFiltro.innerHTML = `<option value="">Todas las categorías</option>`;
-        // Usar Set para eliminar duplicados en categorÃ­as
+        // Usar Set para eliminar duplicados en categorías
         const categoriasUnicas = [...new Set(categorias || [])];
         categoriasUnicas.forEach(categoria => {
             const option = document.createElement('option');
@@ -433,10 +433,10 @@ document.addEventListener('DOMContentLoaded', function() {
             categoriaFiltro.appendChild(option);
         });
     
-        // 4. SubcategorÃ­as
+        // 4. Subcategorías
         const subcategoriaFiltro = document.getElementById('subcategoriaFiltro');
         subcategoriaFiltro.innerHTML = `<option value="">Todas las subcategorías</option>`;
-        // Usar Set para eliminar duplicados en subcategorÃ­as
+        // Usar Set para eliminar duplicados en subcategorías
         const subcategoriasUnicas = [...new Set(subcategorias || [])];
         subcategoriasUnicas.forEach(subcategoria => {
             const option = document.createElement('option');
@@ -476,14 +476,14 @@ document.addEventListener('DOMContentLoaded', function() {
     function reiniciarFiltro(filtroId) {
         const filtro = document.getElementById(filtroId);
         if (filtro) {
-            filtro.innerHTML = '<option value="">Todos</option>'; // Asegurar opciÃ³n "Todos"
+            filtro.innerHTML = '<option value="">Todos</option>'; // Asegurar opción "Todos"
             filtro.value = ""; // Seleccionar "Todos" por defecto
         } else {
-            console.error(`No se encontrÃ³ el filtro con ID "${filtroId}"`);
+            console.error(`No se encontró el filtro con ID "${filtroId}"`);
         }
     }
 
-    // FunciÃ³n para filtrar por descripcion
+    // Función para filtrar por descripcion
     document.getElementById('descProduc').addEventListener('keydown', function(event) {
         if (event.key === 'Enter') { // Comprobar si la tecla presionada es Enter
             const searchTerm = this.value.toLowerCase();
@@ -540,14 +540,14 @@ document.addEventListener('DOMContentLoaded', function() {
             return response.json();
         })
         .then(result => {
-            // Si no hay datos en la respuesta, mostrar alerta y detener la ejecuciÃ³n
+            // Si no hay datos en la respuesta, mostrar alerta y detener la ejecución
             if (!result.data || result.data.length === 0) {
-                showAlert('Sin resultados', 'No hay informaciÃ³n disponible para los filtros aplicados.', 'info');
+                showAlert('Sin resultados', 'No hay información disponible para los filtros aplicados.', 'info');
                 return;
             }
             const valoresSeleccionados = { sucursal, departamento, categoria, subcategoria };
 
-            // Actualizar los selectores con los datos Ãºnicos generados
+            // Actualizar los selectores con los datos únicos generados
             updateSelectors(result.selectores, valoresSeleccionados);
 
             // Calcular los nuevos totales basados en los datos filtrados
@@ -591,9 +591,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         selectorDepartamento.value = departamentoSeleccionado || ""; // Reinicia siempre con "Todos"
     
-        // Llena el selector de categorÃ­as
+        // Llena el selector de categorías
         const selectorCategoria = document.getElementById('categoriaFiltro');
-        selectorCategoria.innerHTML = '<option value="">Todas las categorÃ­as</option>';
+        selectorCategoria.innerHTML = '<option value="">Todas las categorías</option>';
         selectores.categorias.forEach(categoria => {
             const option = document.createElement('option');
             option.value = categoria;
@@ -601,10 +601,10 @@ document.addEventListener('DOMContentLoaded', function() {
             selectorCategoria.appendChild(option);
         });
         selectorCategoria.value = categoriaSeleccionada || ""; // Reinicia siempre con "Todas"
-    
-        // Llena el selector de subcategorÃ­as
+
+        // Llena el selector de subcategorías
         const selectorSubCategoria = document.getElementById('subcategoriaFiltro');
-        selectorSubCategoria.innerHTML = '<option value="">Todas las subcategorÃ­as</option>';
+        selectorSubCategoria.innerHTML = '<option value="">Todas las subcategorías</option>';
         selectores.subcategorias.forEach(subcategoria => {
             const option = document.createElement('option');
             option.value = subcategoria;

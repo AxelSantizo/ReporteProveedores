@@ -111,11 +111,11 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(data => {
             if (data.error && data.error === 'El usuario ya tiene una sesión activa') {
                 Swal.fire({
-                    title: 'Sesion activa',
-                    text: 'El usuario ya tiene una sesion activa. ¿Deseas cerrar la sesion activa y continuar?',
+                    title: 'Sesión activa',
+                    text: 'El usuario ya tiene una sesión activa. ¿Deseas cerrar la sesión activa y continuar?',
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonText: 'Si, cerrar sesion',
+                    confirmButtonText: 'Sí, cerrar sesión',
                     cancelButtonText: 'No'
                 }).then((result) => {
                     if (result.isConfirmed) {

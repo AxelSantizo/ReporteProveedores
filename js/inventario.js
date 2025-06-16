@@ -459,9 +459,9 @@ document.addEventListener('DOMContentLoaded', function() {
             return response.json();
         })
         .then(result => {
-            // Si no hay datos en la respuesta, mostrar alerta y detener la ejecuciÃ³n
+            // Si no hay datos en la respuesta, mostrar alerta y detener la ejecución
             if (!result.data || result.data.length === 0) {
-                showAlert('Sin resultados', 'No hay informaciÃ³n disponible para los filtros aplicados.', 'info');
+                showAlert('Sin resultados', 'No hay información disponible para los filtros aplicados.', 'info');
                 return;
             }
             const valoresSeleccionados = { sucursal, departamento, categoria, subcategoria };
@@ -470,7 +470,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             verButtonFiltro();
 
-            // Actualizar los selectores con los datos Ãºnicos generados
+            // Actualizar los selectores con los datos únicos generados
             updateSelectors(result.selectores, valoresSeleccionados);
 
             // Actualizar la tabla con los datos filtrados
@@ -508,10 +508,10 @@ document.addEventListener('DOMContentLoaded', function() {
             selectorDepartamento.appendChild(option);
         });
         selectorDepartamento.value = departamentoSeleccionado || ""; // Reinicia siempre con "Todos"
-    
-        // Llena el selector de categorÃ­as
+
+        // Llena el selector de categorías
         const selectorCategoria = document.getElementById('categoriaFiltro');
-        selectorCategoria.innerHTML = '<option value="">Todas las categorÃ­as</option>';
+        selectorCategoria.innerHTML = '<option value="">Todas las categorías</option>';
         selectores.categorias.forEach(categoria => {
             const option = document.createElement('option');
             option.value = categoria;
@@ -519,10 +519,10 @@ document.addEventListener('DOMContentLoaded', function() {
             selectorCategoria.appendChild(option);
         });
         selectorCategoria.value = categoriaSeleccionada || ""; // Reinicia siempre con "Todas"
-    
-        // Llena el selector de subcategorÃ­as
+
+        // Llena el selector de subcategorías
         const selectorSubCategoria = document.getElementById('subcategoriaFiltro');
-        selectorSubCategoria.innerHTML = '<option value="">Todas las subcategorÃ­as</option>';
+        selectorSubCategoria.innerHTML = '<option value="">Todas las subcategorías</option>';
         selectores.subcategorias.forEach(subcategoria => {
             const option = document.createElement('option');
             option.value = subcategoria;
